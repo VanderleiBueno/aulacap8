@@ -51,6 +51,10 @@
   .auth-banner-container svg {
     width: 100%;
   }
+  .auth-form-container {
+
+  }
+
 }
 
 @media (min-width: 1400px) {
