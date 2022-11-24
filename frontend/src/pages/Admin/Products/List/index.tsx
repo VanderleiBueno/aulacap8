@@ -16,11 +16,15 @@ const List = () => {
     categories: [
       {
         id: 1,
-        name: 'Livros',
+        name: 'Celulares&cia',
+      },
+      {
+        id: 2,
+        name: 'Computadores',
       },
       {
         id: 3,
-        name: 'Computadores',
+        name: 'Livros&etctal',
       },
     ],
   };
