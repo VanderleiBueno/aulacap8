@@ -6,8 +6,10 @@ import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
 import Select from 'react-select';
 import { Category } from 'types/category';
+import CurrencyInput from 'react-currency-input-field';
 
 import './styles.css';
+
 
 type UrlParams = {
   productId: string;
@@ -52,10 +54,12 @@ const Form = () => {
 
   const onSubmit = (formData: Product) => {
 
+    const ndata = {...formData, price: String(formData.price).replace(',','.'),};
+
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : '/products',
-      data: formData,
+      data: ndata,
       withCredentials: true,
     };
 
@@ -119,16 +123,21 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <input
-                  {...register('price', {
-                    required: 'Campo Obrigatório',
-                  })}
-                  type="text"
-                  className={`form-control base-input ${
-                    errors.name ? 'is-invalid' : ''
-                  }`}
-                  placeholder="Preço"
+                <Controller
                   name="price"
+                  rules={{required: 'Campo Obrigatório'}}
+                  control={control}
+                  render={({ field }) => (
+                    <CurrencyInput
+                      placeholder="Preço"
+                      className={`form-control base-input ${
+                        errors.name ? 'is-invalid' : ''
+                      }`}
+                      disableGroupSeparators={true}
+                      value={field.value}
+                      onValueChange={field.onChange}
+                    />
+                  )}
                 />
                 <div className="invalid-feedback d-block">
                   {errors.price?.message}
