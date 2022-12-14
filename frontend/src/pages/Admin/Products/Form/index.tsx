@@ -68,6 +68,9 @@ const Form = () => {
     .then(() => {
       toast.info('Produto cadastrado com sucesso');
       history.push('/admin/products');
+    })
+    .catch(() => {
+      toast.error('Erro ao cadastrar produto');
     });
   };
 
